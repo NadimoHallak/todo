@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:todo_app/model/group_task_model.dart';
+import 'package:todo_app/model/task_model_request.dart';
 
 abstract class Services {
   Dio dio = Dio();
@@ -7,7 +8,7 @@ abstract class Services {
 
   updateTodo(int id);
   deleteTodo(int id);
-  creteTodo();
- Future<List<Todo>> getTodo();
+  creteTodo(TodoRequestModel todo);
+  Future<List<Todo>> getTodo();
   Todo getOneTodo(int id);
 }

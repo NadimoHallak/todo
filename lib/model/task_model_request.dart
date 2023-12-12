@@ -5,23 +5,19 @@ import 'package:flutter/foundation.dart';
 
 import 'package:todo_app/model/task_model.dart';
 
-class Todo {
-  String id;
+class TodoRequestModel {
   String title;
   List<Tasks>? task;
-  Todo({
-    required this.id,
+  TodoRequestModel({
     required this.title,
-     this.task  ,
+    this.task,
   });
 
-  Todo copyWith({
-    String? id,
+  TodoRequestModel copyWith({
     String? title,
     List<Tasks>? task,
   }) {
-    return Todo(
-      id: id ?? this.id,
+    return TodoRequestModel(
       title: title ?? this.title,
       task: task ?? this.task,
     );
@@ -29,37 +25,34 @@ class Todo {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
       'title': title,
       'task': task?.map((x) => x.toMap()).toList(),
     };
   }
 
-  factory Todo.fromMap(Map<String, dynamic> map) {
-    return Todo(
-      id: map['id'] as String,
+  factory TodoRequestModel.fromMap(Map<String, dynamic> map) {
+    return TodoRequestModel(
       title: map['title'] as String,
-      task: List<Tasks>.from((map['task'] as List<dynamic>).map<dynamic>((x) => Tasks.fromMap(x as Map<String,dynamic>),),),
+      task: map['task'] != null ? List<Tasks>.from((map['task'] as List<int>).map<Tasks?>((x) => Tasks.fromMap(x as Map<String,dynamic>),),) : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Todo.fromJson(String source) => Todo.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory TodoRequestModel.fromJson(String source) => TodoRequestModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'Todo(id: $id, title: $title, task: $task)';
+  String toString() => 'TodoRequestModel(title: $title, task: $task)';
 
   @override
-  bool operator ==(covariant Todo other) {
+  bool operator ==(covariant TodoRequestModel other) {
     if (identical(this, other)) return true;
   
     return 
-      other.id == id &&
       other.title == title &&
       listEquals(other.task, task);
   }
 
   @override
-  int get hashCode => id.hashCode ^ title.hashCode ^ task.hashCode;
+  int get hashCode => title.hashCode ^ task.hashCode;
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/pages/display_todos.dart';
+import 'package:todo_app/router.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,8 +19,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: DisplayAllTasks(),
-            
+      // routerConfig: router,
     );
   }
 }
-

@@ -1,12 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:todo_app/model/group_task_model.dart';
+import 'package:todo_app/model/task_model_request.dart';
 import 'package:todo_app/service/base_todo_serv.dart';
 
 class TodoServ extends Services {
   @override
-  creteTodo() {
-    // TODO: implement creteTodo
-    throw UnimplementedError();
+  creteTodo(TodoRequestModel todo) async {
+    Response response = await dio.post(baseUrl, data: todo.toJson());
+    print(response.data);
   }
 
   @override
